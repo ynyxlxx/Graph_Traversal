@@ -47,8 +47,13 @@ def get_connect_component():     #BFS search
     visited = set()
 
     connect_queue.extend(reads)   #set the start node
-    for node in reads:
+
+    initial_visited = set(reads).intersection(set(node_dict))      #filter out all the nodes that not in the graph
+
+    for node in initial_visited:
         visited.add(node)
+
+    print(len(visited))
 
     while connect_queue:
         pop_out = connect_queue.popleft()
@@ -60,6 +65,7 @@ def get_connect_component():     #BFS search
     print('finding complete.')
     save_result(visited)
     print('save complete.')
+    print(len(visited))
     return
 
 

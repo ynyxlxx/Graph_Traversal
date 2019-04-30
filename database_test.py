@@ -34,12 +34,20 @@ reads = sam_read(samfile)
 connect_queue = deque()
 visited = set()
 connect_queue.extend(reads)
-for node in reads:
-    visited.add(node)
 
 conn = sqlite3.connect('edge-phage-200.db')
 c = conn.cursor()
 
+all_node = c.execute("SELECT keyword FROM edge_data")
+node_set = set()
+for node in all_node:
+    node_set.add(node[0])
+
+initial_visited = set(reads).intersection(node_set)  #filter out all the node that not in the graph
+for node in initial_visited:
+    visited.add(node)
+
+print('total number of start nodes: %i' %len(visited))
 
 while connect_queue:
     pop_out = connect_queue.popleft()
@@ -48,11 +56,6 @@ while connect_queue:
         if row[1] not in visited:
             connect_queue.append(row[1])
             visited.add(row[1])
-
-    # for item in node_dict[pop_out]:
-    #     if item not in visited:
-    #         connect_queue.append(item)
-    #         visited.add(item)
 
 time_end = timeit.default_timer()
 save_result(visited)
