@@ -56,11 +56,12 @@ while connect_queue:
         if row[1] not in visited:
             connect_queue.append(row[1])
             visited.add(row[1])
+            print('number of nodes found now: %i' % len(visited))
 
 time_end = timeit.default_timer()
 save_result(visited)
 print('save complete.')
-print('total time is: '+ str(time_end - time_start) + 's')
+print('duration: '+ str(time_end - time_start) + 's')
 
 c.close()
 conn.close()

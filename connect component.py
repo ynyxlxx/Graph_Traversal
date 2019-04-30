@@ -53,25 +53,25 @@ def get_connect_component():     #BFS search
     for node in initial_visited:
         visited.add(node)
 
-    print(len(visited))
+    print('\n' + 'total number of start nodes: %i' %len(visited))
 
+    print('start searching....')
     while connect_queue:
         pop_out = connect_queue.popleft()
         for item in node_dict[pop_out]:
             if item not in visited:
                 connect_queue.append(item)
                 visited.add(item)
+                print('number of nodes found now: %i' % len(visited))
 
-    print('finding complete.')
-    save_result(visited)
-    print('save complete.')
-    print(len(visited))
+    print('searching complete.')
+    print('result save complete.')
     return
 
 
 filename = 'test_new.gz'
 samfile = 'test_new.sam'
 time_start = timeit.default_timer()
-get_connect_component();
+get_connect_component()
 time_end = timeit.default_timer()
-print('total time is: '+ str(time_end - time_start) + 's')
+print('duration: '+ str(time_end - time_start) + 's')
