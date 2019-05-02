@@ -67,6 +67,7 @@ while connect_queue:
 time_end = timeit.default_timer()
 save_result(visited)
 print('\n'+'save complete.')
+print('please check the result.txt')
 print('duration: '+ str(time_end - time_start) + 's')
 
 c.close()

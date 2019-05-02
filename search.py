@@ -66,6 +66,7 @@ def get_connect_component():     #BFS search
 
     print('\n'+'searching complete.')
     print('result save complete.')
+    print('please check the result.txt')
     return
 
 
