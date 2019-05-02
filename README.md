@@ -31,7 +31,7 @@ positional arguments:
   sam_file    select the sam file as start node
 
 Example: 
-search.py example.asgq.gz example.sam
+search.py example.gz example.sam
 
 db_build.py and search_d.py
 -----------------------------------------------------------
@@ -44,7 +44,7 @@ positional arguments:
   graph_database  select the database of the graph
 
 Example:
-db_build.py  example.asqg.gz my_database.db 
+db_build.py  example.gz my_database.db 
 
 2. After the database is built, use search_d.py to do the search.
 
