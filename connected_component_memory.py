@@ -3,6 +3,7 @@ from collections import deque
 import os
 import timeit
 import gzip
+import argparse
 
 def sam_read(sam_file):    #read sequence ID from SAM file.
     print('loading sam file....')
@@ -17,8 +18,8 @@ def sam_read(sam_file):    #read sequence ID from SAM file.
     return reads
 
 def graph_read(filename, dict):
-    print('loading asqg file......')
-    print('generate dictionary......')
+    print('\n'+'loading asqg file......')
+    print('generate edge dictionary......')
     with gzip.open(filename, 'rt') as file:
         string_line = (line.split() for line in file)
         edge_list = ((item[1], item[2]) for item in string_line)
@@ -31,7 +32,7 @@ def graph_read(filename, dict):
 
 def save_result(node_list):
     cwd = os.getcwd()
-    textFile = cwd + '/' + str(filename) + '-node.txt'
+    textFile = cwd + '/result.txt'
     file = open(textFile, 'w+')
     for i in node_list:
         file.write(''.join(i) + "\n")
@@ -53,9 +54,8 @@ def get_connect_component():     #BFS search
     for node in initial_visited:
         visited.add(node)
 
-    print('\n' + 'total number of start nodes: %i' %len(visited))
-
     print('start searching....')
+    print('\n' + 'total number of start nodes: %i' % len(visited))
     while connect_queue:
         pop_out = connect_queue.popleft()
         for item in node_dict[pop_out]:
@@ -64,13 +64,18 @@ def get_connect_component():     #BFS search
                 visited.add(item)
                 print('number of nodes found now: %i' % len(visited))
 
-    print('searching complete.')
+    print('\n'+'searching complete.')
     print('result save complete.')
     return
 
 
-filename = 'test_new.gz'
-samfile = 'test_new.sam'
+parser = argparse.ArgumentParser(description='find all the connected component of the start node.')
+parser.add_argument('graph_file', help = 'select the graph file')
+parser.add_argument('sam_file',help = 'select the sam file as start node ')
+args = parser.parse_args()
+
+filename = args.graph_file
+samfile = args.sam_file
 time_start = timeit.default_timer()
 get_connect_component()
 time_end = timeit.default_timer()

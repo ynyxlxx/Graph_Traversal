@@ -1,11 +1,11 @@
-import collections
 from collections import deque
 import os
 import timeit
 import sqlite3
+import argparse
 
 def sam_read(sam_file):    #read sequence ID from SAM file.
-    print('loading sam file....')
+    print('\n'+'loading sam file....')
     reads = []
     with open(sam_file) as f:
         for line in f:
@@ -13,20 +13,26 @@ def sam_read(sam_file):    #read sequence ID from SAM file.
             head = str_list[0]
             if '@' not in head[0]:
                 reads.append(str_list[0])
-    print('loading complete.')
+    print('\n'+'loading complete.')
     return reads
 
 def save_result(node_list):
     cwd = os.getcwd()
-    textFile = cwd + '/test-200.txt'
+    textFile = cwd + '/result.txt'
     file = open(textFile, 'w+')
     for i in node_list:
         file.write(''.join(i) + "\n")
     file.close()
     return
 
-samfile = 'E:/Direction study/HIV/unalignedphage_mappedindex.sam'
 
+parser = argparse.ArgumentParser(description = 'find all the connected component of the start node.')
+parser.add_argument('graph_database', help='select the database of the graph')
+parser.add_argument('sam_file', help='select the sam file as start node')
+args = parser.parse_args()
+
+samfile = args.sam_file
+database_name = args.graph_database
 
 time_start = timeit.default_timer()
 reads = sam_read(samfile)
@@ -35,7 +41,7 @@ connect_queue = deque()
 visited = set()
 connect_queue.extend(reads)
 
-conn = sqlite3.connect('edge-phage-200.db')
+conn = sqlite3.connect(database_name)
 c = conn.cursor()
 
 all_node = c.execute("SELECT keyword FROM edge_data")
@@ -47,7 +53,7 @@ initial_visited = set(reads).intersection(node_set)  #filter out all the node th
 for node in initial_visited:
     visited.add(node)
 
-print('total number of start nodes: %i' %len(visited))
+print('\n'+'total number of start nodes: %i' %len(visited))
 
 while connect_queue:
     pop_out = connect_queue.popleft()
@@ -60,7 +66,7 @@ while connect_queue:
 
 time_end = timeit.default_timer()
 save_result(visited)
-print('save complete.')
+print('\n'+'save complete.')
 print('duration: '+ str(time_end - time_start) + 's')
 
 c.close()
