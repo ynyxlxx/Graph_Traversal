@@ -35,7 +35,7 @@ search.py example.gz example.sam
 
 db_build.py and search_d.py
 -----------------------------------------------------------
-1. If you don't have enough memory, use db_build.py to build a database on your hard disk first.
+1. If you don't have enough memory, use db_build.py to build a SQLite database on your hard disk first.
 
 Usage: db_build.py graph_file graph_database
 
