@@ -65,6 +65,6 @@ search_d.py my_database.db example.sam
 4. if the memory is not enough:
   
 		python db_build.py example.gz my_database.db
-  		python search_d.py graph_database sam_file
+  		python search_d.py my_database.db example.sam
   
  then check the result in the result.txt.
