@@ -58,6 +58,7 @@ Example:
 search_d.py my_database.db example.sam
 
 # Example
+-------------------------------------------------------------------------------------
 1.change the directory to the directory that contains your data.
   cd your_dir
 2.do preprocessing, note that graph.asqg.gz is the output of SGA. gzip is used to compress the file to save space.
