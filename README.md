@@ -26,10 +26,6 @@ least 13 GB memory.
 Usage: 
 search.py graph_file sam_file
 
-positional arguments:
-  graph_file  select the graph file
-  sam_file    select the sam file as start node
-
 Example: 
 search.py example.gz example.sam
 
@@ -39,20 +35,12 @@ db_build.py and search_d.py
 
 Usage: db_build.py graph_file graph_database
 
-positional arguments:
-  graph_file      select the graph file
-  graph_database  select the database of the graph
-
 Example:
 db_build.py  example.gz my_database.db 
 
 2. After the database is built, use search_d.py to do the search.
 
 Usage: search_d.py graph_database sam_file
-
-positional arguments:
-  graph_database  select the database of the graph
-  sam_file        select the sam file as start node
 
 Example:
 search_d.py my_database.db example.sam
