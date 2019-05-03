@@ -58,21 +58,23 @@ Example:
 search_d.py my_database.db example.sam
 
 # Example
--------------------------------------------------------------------------------------
+
 1.change the directory to the directory that contains your data.
   cd your_dir
+ 
 2.do preprocessing, note that graph.asqg.gz is the output of SGA. gzip is used to compress the file to save space.
   zgrep "ED.*" graph.asqg.gz > example.txt
   gzip example.txt
+  
 3.if you have enough memory:
  
- python search.py example.gz example.sam
+	python search.py example.gz example.sam
  
  then check the result in the result.txt.
   
-  if the memory is not enough:
+4.if the memory is not enough:
   
-  python db_build.py  example.gz my_database.db
+		python db_build.py  example.gz my_database.db
   python search_d.py graph_database sam_file
   
  then check the result in the result.txt.
